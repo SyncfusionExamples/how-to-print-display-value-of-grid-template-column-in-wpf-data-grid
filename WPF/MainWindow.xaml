@@ -1,0 +1,290 @@
+﻿<Window xmlns:Syncfusion="http://schemas.syncfusion.com/wpf"  x:Class="CaptionSummaryCustomization.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:CaptionSummaryCustomization"
+        Title="Customization of CaptionSummary" Height="710" Width="1024" WindowStartupLocation="CenterScreen" Icon="App.ico"
+        xmlns:interactivity="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
+    <Window.Resources>
+        <local:MenuItemConverter x:Key="menuItemConverter"/>
+        <local:ViewModel x:Key="viewModel"/>
+
+        <Style TargetType="Syncfusion:GridCaptionSummaryCell">
+            <Setter Property="BorderThickness" Value="0,0,1,1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Right"/>
+        </Style>
+        
+        <Style TargetType="Syncfusion:GridExpanderCellControl">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="Gray" />
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="BorderThickness" Value="1,1,1,1" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Width" Value="12"/>
+            <Setter Property="Height" Value="12"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Syncfusion:GridExpanderCellControl">
+                        <Grid Background="{TemplateBinding Background}">
+                            <Path x:Name="PART_GridCollapseCellPath"
+                              Width="11"
+                              Height="11"
+                              Margin="0,-6,-5,-5"
+                              Data="M5,2.0000001 L6,2.0000001 6,5 9,5 9,6 6,6 6,9 5,9 5,6 2.0000001,6 2.0000001,5 5,5 z M1,1 L1,10 10,10 10,1 z M0,0 L11,0 11,1 11,10 11,11 10,11 1,11 0,11 0,10 0,1 z"
+                              Fill="{TemplateBinding Foreground}"
+                              Stretch="Fill" />
+                            <Path x:Name="PART_GridExpanderCellPath"
+                              Canvas.Left="15"
+                              Canvas.Top="0"
+                              Width="11"
+                              Height="11"
+                              Margin="0,-6,-5,-5"
+                              Data="M2,5 L9,5 9,6 2,6 z M1,1 L1,10 10,10 10,1 z M0,0 L11,0 11,1 11,10 11,11 10,11 1,11 0,11 0,10 0,1 z"
+                              Fill="{TemplateBinding Foreground}"
+                              Stretch="Fill"
+                              Visibility="Collapsed" />
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="ExpansionStates">
+                                    <VisualState x:Name="Expanded">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_GridCollapseCellPath" Storyboard.TargetProperty="(FrameworkElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Collapsed</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_GridExpanderCellPath" Storyboard.TargetProperty="(FrameworkElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Visible</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Collapsed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_GridCollapseCellPath" Storyboard.TargetProperty="(FrameworkElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Visible</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_GridExpanderCellPath" Storyboard.TargetProperty="(FrameworkElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Collapsed</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+        <Style TargetType="{x:Type Syncfusion:GridIndentCell}">
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="BorderBrush" Value="DimGray"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border x:Name="PART_GridIndentCellBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="BorderStates">
+                                    <VisualState x:Name="DataRow" >
+                                        <Storyboard BeginTime="0">
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="PART_GridIndentCellBorder" Storyboard.TargetProperty="(Border.BorderThickness)">
+                                                <EasingThicknessKeyFrame KeyTime="0" Value="0,0,0,1" />
+                                            </ThicknessAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SummaryRow" >
+                                        <Storyboard BeginTime="0">
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="PART_GridIndentCellBorder" Storyboard.TargetProperty="(Border.BorderThickness)">
+                                                <EasingThicknessKeyFrame KeyTime="0" Value="0,0,0,1" />
+                                            </ThicknessAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="TableSummaryRow">
+                                        <Storyboard BeginTime="0">
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="PART_GridIndentCellBorder" Storyboard.TargetProperty="(Border.BorderThickness)">
+                                                <EasingThicknessKeyFrame KeyTime="0" Value="0,0,0,1" />
+                                            </ThicknessAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Expander_Collapsed">
+                                        <Storyboard BeginTime="0">
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="PART_GridIndentCellBorder" Storyboard.TargetProperty="(Border.BorderThickness)">
+                                                <EasingThicknessKeyFrame KeyTime="0" Value="0,0,0,1" />
+                                            </ThicknessAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="After_Expander">
+                                        <Storyboard BeginTime="0">
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="PART_GridIndentCellBorder" Storyboard.TargetProperty="(Border.BorderThickness)">
+                                                <EasingThicknessKeyFrame KeyTime="0" Value="0,0,0,1" />
+                                            </ThicknessAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Before_Expander">
+                                        <Storyboard BeginTime="0">
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="PART_GridIndentCellBorder" Storyboard.TargetProperty="(Border.BorderThickness)">
+                                                <EasingThicknessKeyFrame KeyTime="0" Value="0,0,0,1" />
+                                            </ThicknessAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Expander_Expanded">
+                                        <Storyboard BeginTime="0">
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="PART_GridIndentCellBorder" Storyboard.TargetProperty="(Border.BorderThickness)">
+                                                <EasingThicknessKeyFrame KeyTime="0" Value="0,0,0,1" />
+                                            </ThicknessAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Last_GroupRow">
+                                        <Storyboard BeginTime="0">
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="PART_GridIndentCellBorder" Storyboard.TargetProperty="(Border.BorderThickness)">
+                                                <EasingThicknessKeyFrame KeyTime="0" Value="0,0,0,1" />
+                                            </ThicknessAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Fixed_NormalCell">
+                                        <Storyboard BeginTime="0">
+                                            <ThicknessAnimationUsingKeyFrames BeginTime="0"
+                                                                          Duration="1"
+                                                                          Storyboard.TargetName="PART_GridIndentCellBorder"
+                                                                          Storyboard.TargetProperty="BorderThickness">
+                                                <EasingThicknessKeyFrame KeyTime="0" Value="0, 1, 0, 1" />
+                                            </ThicknessAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter VerticalAlignment="Center" SnapsToDevicePixels="True" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid x:Name="maingrid" DataContext="{StaticResource viewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Syncfusion:SfDataGrid x:Name="datagrid"  Grid.Row="1"
+                               ColumnSizer="Auto"
+                               AutoExpandGroups="False"
+                               AutoGenerateColumns="True"
+                               AllowResizingColumns="True" 
+                               AllowEditing="True"                                
+                               AllowSorting="True" 
+                               ItemsSource="{Binding Employees}"
+                               AllowGrouping="True" 
+                               ShowGroupDropArea="True" 
+                               SelectionMode="Single" 
+                               ShowRowHeader="True" 
+                               ShowColumnWhenGrouped="True"
+                               LiveDataUpdateMode="AllowDataShaping"
+                               SelectionUnit="Row">
+
+            <interactivity:Interaction.Behaviors>
+                <local:SfGridBehavior/>
+            </interactivity:Interaction.Behaviors>
+
+            <Syncfusion:SfDataGrid.Columns>
+                <Syncfusion:GridTextColumn HeaderText="Employee Name" MappingName="EmployeeName" />
+                <Syncfusion:GridTemplateColumn HeaderText="Employee Salary" MappingName="EmployeeSalary" >
+                    <Syncfusion:GridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="textBox" Text="{Binding EmployeeArea}"/>
+                                <Line Y1="1" Y2="{Binding Path=ActualHeight,ElementName=textBox}" Stroke="Black" Margin="5"/>
+                                <TextBlock Text="{Binding EmployeeSalary}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </Syncfusion:GridTemplateColumn.CellTemplate>
+                </Syncfusion:GridTemplateColumn>
+                <Syncfusion:GridTextColumn HeaderText="Employee Area" MappingName="EmployeeArea"/>
+                <Syncfusion:GridTextColumn HeaderText="Employee Gender" MappingName="EmployeeGender"/>
+                <Syncfusion:GridTextColumn HeaderText="Date of Join" MappingName="JoiningDate"/>
+                <Syncfusion:GridTextColumn HeaderText="Contact Number" MappingName="ContactNumber" />
+            </Syncfusion:SfDataGrid.Columns>
+
+            <Syncfusion:SfDataGrid.GroupColumnDescriptions>
+                <Syncfusion:GroupColumnDescription ColumnName="EmployeeGender"/>
+                <Syncfusion:GroupColumnDescription ColumnName="EmployeeArea"/>
+            </Syncfusion:SfDataGrid.GroupColumnDescriptions>
+
+            <Syncfusion:SfDataGrid.CaptionSummaryRow>
+                <Syncfusion:GridSummaryRow ShowSummaryInRow="False">
+                    <Syncfusion:GridSummaryRow.SummaryColumns>
+                        <Syncfusion:GridSummaryColumn MappingName="EmployeeSalary"
+                                                      Format="'{Sum:c}'"
+                                                      Name="EmployeeSalary"
+                                                      SummaryType="DoubleAggregate">
+                        </Syncfusion:GridSummaryColumn>
+                        <Syncfusion:GridSummaryColumn MappingName="EmployeeArea"
+                                                      Format="'{Count:d}'"
+                                                      Name="EmployeeArea"
+                                                      SummaryType="CountAggregate">
+                        </Syncfusion:GridSummaryColumn>
+                    </Syncfusion:GridSummaryRow.SummaryColumns>
+                </Syncfusion:GridSummaryRow>
+            </Syncfusion:SfDataGrid.CaptionSummaryRow>
+
+            <Syncfusion:SfDataGrid.GroupCaptionContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Increase" ItemsSource="{Binding CommandList, Source={StaticResource viewModel}}">
+                        <MenuItem.ItemContainerStyle>
+                            <Style TargetType="{x:Type MenuItem}">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="Header" Value="{Binding Path=Header, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=MenuItem}}"/>
+                                <Setter Property="Command" Value="{Binding IncreaseCommand, Source={StaticResource viewModel}}"/>
+                                <Setter Property="CommandParameter">
+                                    <Setter.Value>
+                                        <MultiBinding Converter="{StaticResource menuItemConverter}">
+                                            <Binding  RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType=MenuItem}" Path="Header"/>
+                                            <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=ContextMenu}" Path="DataContext"/>
+                                        </MultiBinding>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </MenuItem.ItemContainerStyle>
+                    </MenuItem>
+                </ContextMenu>
+            </Syncfusion:SfDataGrid.GroupCaptionContextMenu>
+
+        </Syncfusion:SfDataGrid>
+
+        <StackPanel Orientation="Vertical" Grid.Column="1">
+            <Button Content="StartTimer" Click="Button_Click"/>
+            <Button Content="StopTimer" Click="Button_Click_1"/>
+            <Button Command="local:Commands.PrintPreview" CommandTarget="{Binding ElementName=datagrid}" Content="Show Print Preview"/>
+
+        </StackPanel>
+    </Grid>
+</Window>
