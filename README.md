@@ -4,7 +4,7 @@ How to print DisplayValue of GridTemplateColumn in WPF DataGrid (SfDataGrid) ?
 
 # About the sample
 
-In [WPF DataGrid](https://help.syncfusion.com/wpf/datagrid/column-types#gridtemplatecolumn) (SfDataGrid), you can print a displayed data except GridTemplateColumn CellTemplate and changed it format by overriding the GetColumnElement in GridPrintManager class.
+In [WPF DataGrid](https://www.syncfusion.com/wpf-ui-controls/datagrid) (SfDataGrid), you can print a displayed data except GridTemplateColumn CellTemplate and changed it format by overriding the GetColumnElement in GridPrintManager class.
 
 ```c#
 protected override object GetColumnElement(object record, string mappingName)
