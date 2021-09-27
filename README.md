@@ -34,5 +34,8 @@ protected override object GetColumnElement(object record, string mappingName)
     }
 }
 ```
+
+KB article - [How to print DisplayValue of GridTemplateColumn in WPF DataGrid (SfDataGrid)?](https://www.syncfusion.com/kb/12006/how-to-print-display-value-of-gridtemplatecolumn-in-wpf-datagrid-sfdatagrid)
+
 ## Requirements to run the demo
  Visual Studio 2015 and above versions
